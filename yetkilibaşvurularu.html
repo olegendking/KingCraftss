@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KingCraftsMC - Başvurular</title>
+    <link rel="stylesheet" href="başvurustili.css">
+    <link rel="icon" href="KingCraftsMC.png">
+    <link rel="apple-touch-icon" href="KingCraftsMC.png">
+</head>
+<body>
+
+<!-- Navbar -->
+<header class="navbar">
+    <div class="logo">
+        <img src="KingCraftsMC.png" alt="KingCraftsMC Logo">
+        <span>KingCraftsMC</span>
+    </div>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">🏠 Anasayfa</a></li>
+            <li><a href="sosyalmedya.html">🌐 Sosyal Medya</a></li>
+            <li><a href="destek.html">🎫 Destek</a></li>
+            <li><a href="yetkilibaşvurularu.html" class="active">✉ Başvurular</a></li>
+        </ul>
+    </nav>
+
+</header>
+
+<section class="application">
+    <h1>🛡️ Yetkili Başvurusu</h1>
+    <p>Hey Sen! KingCraftsMC Sunucusunda Yetkili Olmak İstermisin?
+        Ozaman Formu Doldurup Bize Gönder En Geç 1 Hafta İçinde Geri Dönüş Yapalım.</p>
+
+    <form id="appForm">
+        Gercek isim ve yaşın? <br/>
+        <input id="name" type="text" placeholder="Ad Soyad / Yaş" required> <br/><br/>
+        Minecraft Oyun İçi İsmin? <br/>
+        <input id="mcname" type="text" placeholder="Oyun İçi İsim" required> <br/><br/>
+        Discord nick ve Discordu aktif kullanabiliyor musun? <br/>
+        <input id="dcname" type="text" placeholder="Discord (isim#1234)" required> <br/><br/>
+
+        Sunucuda günlük hangi saat aralıklarında aktif olabilirsiniz? <br/>
+        <select id="time" required>
+            <option value="">Günlük Aktif Süre</option>
+            <option>1-2 Saat</option>
+            <option>3-5 Saat</option>
+            <option>6+ Saat</option>
+        </select> <br/><br/>
+
+        Sohbet içinde ki üslübunuza, yazım ve imla kurallarına dikkat eder misiniz? <br/>
+        <input id="soru1" type="text" placeholder="" required> <br/><br/>
+        Diğer yetkili üyeleriyle iyi anlaşabilceğini düşünüyor musun? Halihazırda iyi anlaştığın bir yetkili var mı? Varsa kim? <br/>
+        <input id="soru2" type="text" placeholder="" required> <br/><br/>
+
+        Sunucumuzu Ne Üzerinden Oynuyorsun? (Java Bilgisayar) <br/>
+        <select id="java" required>
+            <option value="">Oynadığın Platrform Seçimi</option>
+            <option>Java</option>
+        </select> <br/><br/>
+
+        Bize Kendinden Biraz Bahsedermisin, Seni Neden Yetkili Alalım?
+        <textarea id="reason" placeholder="Neden yetkili olmak istiyorsun?" required></textarea>
+
+    <button type="submit">Başvuruyu Gönder</button>
+</form>
+
+<div class="success" id="successMsg">
+    ✅ Başvurun Discord’a gönderildi!
+</div>
+
+<script>
+const webhookURL = "https://discord.com/api/webhooks/1461372523957457142/j_Qty4Vhcagtp0F5qAJqpEKhm9Ega0hZv5HxDEgIL7Rxbpddq8zVYx8iY_GnedVSncsp";
+
+document.getElementById("appForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const name = document.getElementById("name").value;
+    const mcname = document.getElementById("mcname").value;
+    const dcname = document.getElementById("dcname").value;
+    const time = document.getElementById("time").value;
+    const soru1 = document.getElementById("soru1").value;
+    const soru2 = document.getElementById("soru2").value;
+    const java = document.getElementById("java").value;
+    const reason = document.getElementById("reason").value;
+
+    const data = {
+        username: "KingCraftsMC Başvuru Sistemi",
+        embeds: [{
+            title: "🛡️ Yeni Yetkili Başvurusu",
+            color: 3447003,
+            fields: [
+                { name: "👤 Ad Soyad / Yaş", value: name, inline: true },
+                { name: "🎮 Minecraft", value: mcname, inline: false },
+                { name: "💬 Discord", value: dcname, inline: false },
+                { name: "⏱️ Aktif Süre", value: time, inline: false },
+                { name: "Sohbet içinde ki üslübunuza, yazım ve imla kurallarına dikkat eder misiniz?", value: soru1, inline: false },
+                { name: "Diğer yetkili üyeleriyle iyi anlaşabilceğini düşünüyor musun?", value: soru2, inline: false },
+                { name: "Sunucumuzu Ne Üzerinden Oynuyorsun?", value: java, inline: false },
+                { name: "Kendinden Bahsedermisin? Seni Neden Alalım?", value: reason, inline: false }
+            ],
+            footer: { text: "KingCraftsMC Yetkili Sistemi" }
+        }]
+    };
+
+    fetch(webhookURL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(() => {
+        document.getElementById("successMsg").style.display = "block";
+        document.getElementById("appForm").reset();
+    })
+    .catch(err => {
+        alert("Discord'a gönderilemedi!");
+        console.error(err);
+    });
+});
+</script>
+
+<script src="snow.js"></script>
+
+</body>
+</html>
