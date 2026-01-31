@@ -36,8 +36,6 @@
     <form id="appForm">
         Gercek isim ve yaşın? <br/>
         <input id="name" type="text" placeholder="Ad Soyad / Yaş" required> <br/><br/>
-        Minecraft Oyun İçi İsmin? <br/>
-        <input id="mcname" type="text" placeholder="Oyun İçi İsim" required> <br/><br/>
         Discord nick ve Discordu aktif kullanabiliyor musun? <br/>
         <input id="dcname" type="text" placeholder="Discord (isim#1234)" required> <br/><br/>
 
@@ -53,12 +51,6 @@
         <input id="soru1" type="text" placeholder="" required> <br/><br/>
         Diğer yetkili üyeleriyle iyi anlaşabilceğini düşünüyor musun? Halihazırda iyi anlaştığın bir yetkili var mı? Varsa kim? <br/>
         <input id="soru2" type="text" placeholder="" required> <br/><br/>
-
-        Sunucumuzu Ne Üzerinden Oynuyorsun? (Java Bilgisayar) <br/>
-        <select id="java" required>
-            <option value="">Oynadığın Platrform Seçimi</option>
-            <option>Java</option>
-        </select> <br/><br/>
 
         Bize Kendinden Biraz Bahsedermisin, Seni Neden Yetkili Alalım?
         <textarea id="reason" placeholder="Neden yetkili olmak istiyorsun?" required></textarea>
@@ -77,12 +69,10 @@ document.getElementById("appForm").addEventListener("submit", function(e) {
     e.preventDefault();
 
     const name = document.getElementById("name").value;
-    const mcname = document.getElementById("mcname").value;
     const dcname = document.getElementById("dcname").value;
     const time = document.getElementById("time").value;
     const soru1 = document.getElementById("soru1").value;
     const soru2 = document.getElementById("soru2").value;
-    const java = document.getElementById("java").value;
     const reason = document.getElementById("reason").value;
 
     const data = {
@@ -92,12 +82,10 @@ document.getElementById("appForm").addEventListener("submit", function(e) {
             color: 3447003,
             fields: [
                 { name: "👤 Ad Soyad / Yaş", value: name, inline: true },
-                { name: "🎮 Minecraft", value: mcname, inline: false },
                 { name: "💬 Discord", value: dcname, inline: false },
                 { name: "⏱️ Aktif Süre", value: time, inline: false },
                 { name: "Sohbet içinde ki üslübunuza, yazım ve imla kurallarına dikkat eder misiniz?", value: soru1, inline: false },
                 { name: "Diğer yetkili üyeleriyle iyi anlaşabilceğini düşünüyor musun?", value: soru2, inline: false },
-                { name: "Sunucumuzu Ne Üzerinden Oynuyorsun?", value: java, inline: false },
                 { name: "Kendinden Bahsedermisin? Seni Neden Alalım?", value: reason, inline: false }
             ],
             footer: { text: "KingCraftsMC Yetkili Sistemi" }
@@ -123,4 +111,5 @@ document.getElementById("appForm").addEventListener("submit", function(e) {
 <script src="snow.js"></script>
 
 </body>
+
 </html>
